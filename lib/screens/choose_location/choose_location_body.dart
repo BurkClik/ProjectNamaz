@@ -115,12 +115,7 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
                   horizontal: getProportionateScreenWidth(20)),
               child: DefaultButton(
                 press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PrayerTime(),
-                    ),
-                  );
+                  Navigator.of(context).popAndPushNamed("/prayer_time");
                 },
                 text: 'Devamkee',
               ),

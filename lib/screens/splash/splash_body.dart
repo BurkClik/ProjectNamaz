@@ -63,11 +63,8 @@ class _SplashBodyState extends State<SplashBody> {
                     Spacer(flex: 3),
                     DefaultButton(
                       press: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ChooseLocation()),
-                        );
+                        Navigator.of(context)
+                            .popAndPushNamed('/choose_location');
                       },
                       text: 'Go to Heaven!',
                     ),
