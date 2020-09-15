@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:namaz_project_x/components/time_table.dart';
 
 class PrayerBody extends StatefulWidget {
   @override
@@ -8,14 +9,10 @@ class PrayerBody extends StatefulWidget {
 class _PrayerBodyState extends State<PrayerBody> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
+      fit: StackFit.expand,
       children: [
-        Container(
-          color: Colors.orange,
-        ),
-        Container(
-          color: Colors.white,
-        )
+        TimeTable(),
       ],
     );
   }
