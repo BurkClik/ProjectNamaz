@@ -5,7 +5,7 @@ import 'package:namaz_project_x/theme/theme.dart';
 
 /// TODO:
 ///   []  Splash Screen'in uygulamanın ilk açılışta çıkmasını sağla
-///   []  Şehir seçim ekranından sonra geri dönüş yok
+///   [x]  Şehir seçim ekranından sonra geri dönüş yok
 ///   []  Splash Screen'e düzgün resim ve yazılar bul
 ///   []  Kaza namazı sayacı
 ///   []  Kıble bulmaz
