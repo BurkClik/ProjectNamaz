@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:namaz_project_x/constant.dart';
+import 'package:namaz_project_x/screens/prayer_time/prayer_time_body.dart';
 import 'package:namaz_project_x/size_config.dart';
 
 class DemoHome extends StatefulWidget {
@@ -75,41 +76,7 @@ class _DemoHomeState extends State<DemoHome> {
             itemExtent: 350,
             delegate: SliverChildListDelegate(
               [
-                Padding(
-                  padding: EdgeInsets.only(top: 38.0, left: 8.0, right: 8.0),
-                  child: Table(
-                    border: TableBorder(
-                      horizontalInside: BorderSide(),
-                    ),
-                    defaultColumnWidth: IntrinsicColumnWidth(),
-                    children: [
-                      TableRow(
-                        decoration: BoxDecoration(),
-                        children: [
-                          TableCell(
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 8.0),
-                              child: Text(''),
-                            ),
-                          ),
-                          Text('İmsak'),
-                          Text('Güneş'),
-                          Text('Öğlen'),
-                          Text('İkindi'),
-                          Text('Akşam'),
-                          Text('Yatsı'),
-                        ],
-                      ),
-                      buildTableRow('Pazartesi'),
-                      buildTableRow('Salı'),
-                      buildTableRow('Çarşamba'),
-                      buildTableRow('Perşembe'),
-                      buildTableRow('Cuma'),
-                      buildTableRow('Cumartesi'),
-                      buildTableRow('Pazar'),
-                    ],
-                  ),
-                ),
+                PrayerBody(),
               ],
             ),
           ),
@@ -131,71 +98,6 @@ class _DemoHomeState extends State<DemoHome> {
           ), */
         ],
       ),
-    );
-  }
-
-  TableRow buildTableRow(String day) {
-    return TableRow(
-      children: [
-        TableCell(
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(day),
-          ),
-        ),
-        TableCell(
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Text('05:17'),
-          ),
-        ),
-        Text('05:17'),
-        Text('05:17'),
-        Text('05:17'),
-        Text('05:17'),
-        Text('05:17'),
-      ],
-    );
-  }
-}
-
-class DemoVakit extends StatelessWidget {
-  const DemoVakit({
-    Key key,
-    this.day,
-  }) : super(key: key);
-  final String day;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text(
-          day,
-          style: GoogleFonts.muli(),
-        ),
-        Text(
-          '05:17',
-          style: GoogleFonts.muli(),
-        ),
-        Text(
-          '05:17',
-          style: GoogleFonts.muli(),
-        ),
-        Text(
-          '05:17',
-          style: GoogleFonts.muli(),
-        ),
-        Text(
-          '05:17',
-          style: GoogleFonts.muli(),
-        ),
-        Text(
-          '05:17',
-          style: GoogleFonts.muli(),
-        ),
-      ],
     );
   }
 }
