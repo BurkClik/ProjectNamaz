@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:namaz_project_x/constant.dart';
+import 'package:namaz_project_x/theme/constant.dart';
 import 'package:namaz_project_x/models/weekdays_model.dart';
 
 class TimeTable extends StatefulWidget {

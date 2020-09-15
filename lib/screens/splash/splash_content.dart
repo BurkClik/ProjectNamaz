@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:namaz_project_x/constant.dart';
-import 'package:namaz_project_x/size_config.dart';
+import 'package:namaz_project_x/theme/constant.dart';
+import 'package:namaz_project_x/theme/size_config.dart';
 
 class SplashContent extends StatelessWidget {
   const SplashContent({

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:namaz_project_x/components/default_button.dart';
-import 'package:namaz_project_x/constant.dart';
-import 'package:namaz_project_x/screens/demo_home.dart';
+import 'package:namaz_project_x/theme/constant.dart';
 import 'package:namaz_project_x/screens/prayer_time/prayer_time.dart';
-import 'package:namaz_project_x/size_config.dart';
+import 'package:namaz_project_x/theme/size_config.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
 /// TODO:
@@ -119,7 +118,7 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DemoHome(),
+                      builder: (context) => PrayerTime(),
                     ),
                   );
                 },
