@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:namaz_project_x/components/default_button.dart';
-import 'package:namaz_project_x/components/splash_content.dart';
-import 'package:namaz_project_x/constant.dart';
-import 'package:namaz_project_x/screens/choose_location.dart';
-import 'package:namaz_project_x/size_config.dart';
+import 'package:namaz_project_x/screens/splash/splash_content.dart';
+import 'package:namaz_project_x/theme/constant.dart';
+import 'package:namaz_project_x/screens/choose_location/choose_location.dart';
+import 'package:namaz_project_x/theme/size_config.dart';
 
 class SplashBody extends StatefulWidget {
   @override

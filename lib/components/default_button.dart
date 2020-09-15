@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:namaz_project_x/constant.dart';
-import 'package:namaz_project_x/size_config.dart';
+import 'package:namaz_project_x/theme/constant.dart';
+import 'package:namaz_project_x/theme/size_config.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({
