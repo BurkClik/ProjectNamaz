@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:namaz_project_x/models/times.dart';
 import 'package:namaz_project_x/theme/constant.dart';
 import 'package:namaz_project_x/models/weekdays_model.dart';
+import 'package:intl/intl.dart';
 
 class TimeTable extends StatefulWidget {
   @override
@@ -9,65 +11,7 @@ class TimeTable extends StatefulWidget {
 
 class _TimeTableState extends State<TimeTable> {
   Weekdays days = new Weekdays();
-
-  List<Map<String, String>> data = [
-    {
-      "sabah": "05:22",
-      "günes": "06:40",
-      "öğle": "13:22",
-      "ikindi": "16:44",
-      "akşam": "18.58",
-      "yatsı": "20:37"
-    },
-    {
-      "sabah": "05:23",
-      "günes": "06:41",
-      "öğle": "13:23",
-      "ikindi": "16:45",
-      "akşam": "18.59",
-      "yatsı": "20:38"
-    },
-    {
-      "sabah": "05:24",
-      "günes": "06:42",
-      "öğle": "13:24",
-      "ikindi": "16:46",
-      "akşam": "19.00",
-      "yatsı": "20:39"
-    },
-    {
-      "sabah": "05:25",
-      "günes": "06:43",
-      "öğle": "13:25",
-      "ikindi": "16:47",
-      "akşam": "19.01",
-      "yatsı": "20:40"
-    },
-    {
-      "sabah": "05:26",
-      "günes": "06:44",
-      "öğle": "13:26",
-      "ikindi": "16:48",
-      "akşam": "19.02",
-      "yatsı": "20:41"
-    },
-    {
-      "sabah": "05:27",
-      "günes": "06:45",
-      "öğle": "13:27",
-      "ikindi": "16:49",
-      "akşam": "19.03",
-      "yatsı": "20:42"
-    },
-    {
-      "sabah": "05:28",
-      "günes": "06:46",
-      "öğle": "13:28",
-      "ikindi": "16:52",
-      "akşam": "19.04",
-      "yatsı": "20:43"
-    },
-  ];
+  Times weeklyTimes = new Times();
 
   @override
   Widget build(BuildContext context) {
@@ -88,20 +32,20 @@ class _TimeTableState extends State<TimeTable> {
                 ),
               ),
               Text('İmsak', style: kVakitTextStyle),
-              Text('Güneş', style: kVakitTextStyle),
+              //Text('Güneş', style: kVakitTextStyle),
               Text('Öğle', style: kVakitTextStyle),
               Text('İkindi', style: kVakitTextStyle),
               Text('Akşam', style: kVakitTextStyle),
               Text('Yatsı', style: kVakitTextStyle),
             ],
           ),
-          buildTableRow(days.getWeekdays()[0], data),
-          buildTableRow(days.getWeekdays()[1], data),
-          buildTableRow(days.getWeekdays()[2], data),
-          buildTableRow(days.getWeekdays()[3], data),
-          buildTableRow(days.getWeekdays()[4], data),
-          buildTableRow(days.getWeekdays()[5], data),
-          buildTableRow(days.getWeekdays()[6], data),
+          buildTableRow(days.getWeekdays()[0], weeklyTimes.getTimes()),
+          buildTableRow(days.getWeekdays()[1], weeklyTimes.getTimes()),
+          buildTableRow(days.getWeekdays()[2], weeklyTimes.getTimes()),
+          buildTableRow(days.getWeekdays()[3], weeklyTimes.getTimes()),
+          buildTableRow(days.getWeekdays()[4], weeklyTimes.getTimes()),
+          buildTableRow(days.getWeekdays()[5], weeklyTimes.getTimes()),
+          buildTableRow(days.getWeekdays()[6], weeklyTimes.getTimes()),
         ],
       ),
     );
@@ -112,7 +56,9 @@ class _TimeTableState extends State<TimeTable> {
       children: [
         TableCell(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
+            padding: day == days.getDay()
+                ? EdgeInsets.symmetric(vertical: 16.0)
+                : EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               day,
               style: TextStyle(
@@ -125,7 +71,7 @@ class _TimeTableState extends State<TimeTable> {
           ),
         ),
         buildTableCell(time, day, "sabah"),
-        buildTableCell(time, day, "günes"),
+        //buildTableCell(time, day, "günes"),
         buildTableCell(time, day, "öğle"),
         buildTableCell(time, day, "ikindi"),
         buildTableCell(time, day, "akşam"),
@@ -142,7 +88,7 @@ class _TimeTableState extends State<TimeTable> {
         style: TextStyle(
           color: day == days.getDay() ? Colors.black : kTextColor,
           fontWeight:
-              day == days.getDay() ? FontWeight.w900 : FontWeight.normal,
+              day == days.getDay() ? FontWeight.bold : FontWeight.normal,
           fontFamily: "Mulish",
         ),
       ),
