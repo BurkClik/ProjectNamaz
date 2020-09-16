@@ -97,7 +97,7 @@ class _PrayerTimeState extends State<PrayerTime> {
         slivers: [
           CustomAppBar(),
           SliverFixedExtentList(
-            itemExtent: 800,
+            itemExtent: 1800,
             delegate: SliverChildListDelegate(
               [
                 screens[_selectedPage],

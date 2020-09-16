@@ -1,7 +1,47 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:namaz_project_x/models/times.dart';
 import 'package:namaz_project_x/theme/size_config.dart';
 
-class MyFlexiableAppBar extends StatelessWidget {
+class MyFlexiableAppBar extends StatefulWidget {
+  @override
+  _MyFlexiableAppBarState createState() => _MyFlexiableAppBarState();
+}
+
+class _MyFlexiableAppBarState extends State<MyFlexiableAppBar> {
+  Times newTimes = new Times();
+
+  // ignore: unused_field
+  Timer _a;
+  String _vakit;
+  DateTime _now = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    //var _diff = _newTime.difference(_now);
+    print(newTimes.hourMinutes(3, "sabah", 0));
+    print(newTimes.getSunTime(_now));
+    _a = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      setState(() {
+        _now = DateTime.now();
+        var _newTime = DateTime.utc(
+            _now.year, _now.month, 17, newTimes.hourMinutes(3, "sabah", 0), 25);
+        var _diff = _newTime.difference(_now);
+        _vakit = _diff.inHours < 10
+            ? "0${_diff.toString().split('.')[0]}"
+            : "${_diff.toString().split('.')[0]}";
+      });
+    });
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,26 +68,47 @@ class MyFlexiableAppBar extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: getProportionateScreenHeight(30),
-                    ),
-                    child: Container(
-                      child: Text(
-                        "05:22",
-                        style: TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 2.0,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 36.0,
-                          shadows: [
-                            Shadow(
-                                blurRadius: 10.0,
-                                color: Colors.black,
-                                offset: Offset(5.0, 5.0)),
-                          ],
-                        ),
+                  Container(
+                    child: Text(
+                      "05:22",
+                      style: TextStyle(
+                        color: Colors.white,
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 36.0,
+                        shadows: [
+                          Shadow(
+                              blurRadius: 10.0,
+                              color: Colors.black,
+                              offset: Offset(5.0, 5.0)),
+                        ],
                       ),
+                    ),
+                  ),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.wb_sunny,
+                          color: Colors.yellow,
+                        ),
+                        SizedBox(width: getProportionateScreenWidth(4)),
+                        Text(
+                          newTimes.getSunTime(_now),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                  blurRadius: 10.0,
+                                  color: Colors.black,
+                                  offset: Offset(5.0, 5.0)),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],
@@ -96,7 +157,7 @@ class MyFlexiableAppBar extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(bottom: 8.0, right: 8.0),
                           child: Text(
-                            "04:23:12",
+                            _vakit != null ? '$_vakit' : '',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
