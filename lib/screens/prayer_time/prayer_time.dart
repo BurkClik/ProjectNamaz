@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:namaz_project_x/components/custom_appbar.dart';
+import 'package:namaz_project_x/screens/kaza_calculate/kaza.calculate.dart';
 import 'package:namaz_project_x/screens/kaza_sayar/kaza_sayar.dart';
 import 'package:namaz_project_x/screens/prayer_time/prayer_time_body.dart';
+import 'package:namaz_project_x/screens/zikir/zikir.dart';
 import 'package:namaz_project_x/theme/size_config.dart';
 
 class PrayerTime extends StatefulWidget {
@@ -17,6 +19,8 @@ class _PrayerTimeState extends State<PrayerTime> {
   final List<Widget> screens = [
     PrayerBody(),
     KazaSayar(),
+    KazaCalculate(),
+    Zikir(),
   ];
 
   @override
@@ -68,7 +72,23 @@ class _PrayerTimeState extends State<PrayerTime> {
             ),
             ListTile(
               leading: Icon(Icons.watch),
+              title: Text('Kaza Namazı Hesaplayacı'),
+              onTap: () {
+                setState(() {
+                  _selectedPage = 2;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.watch),
               title: Text('Zikirmatik'),
+              onTap: () {
+                setState(() {
+                  _selectedPage = 3;
+                });
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
