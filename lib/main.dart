@@ -13,6 +13,9 @@ import 'package:namaz_project_x/theme/theme.dart';
 ///   []  Home ekranında location pop-up ile location güncelleme
 ///   []  Vakit çıkma süresi interaktif olmalı
 ///   []  appBar ana zamanda sıradaki zamanı göstermeli
+///   []  GPS kullanarak konum al yavru.
+///   []  İl seçince ilin ilçeleri gelecek.
+///   []  Pickerların tasarımı yapılacak.
 
 void main() {
   runApp(MyApp());

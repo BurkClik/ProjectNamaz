@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:namaz_project_x/models/times.dart';
 import 'package:namaz_project_x/theme/size_config.dart';
 
+/// This widget is not necessary for now.
+/// When we use state management, we can move the state from custom_appbar to here.
+
 class MyFlexiableAppBar extends StatefulWidget {
   @override
   _MyFlexiableAppBarState createState() => _MyFlexiableAppBarState();
@@ -20,13 +23,18 @@ class _MyFlexiableAppBarState extends State<MyFlexiableAppBar> {
   void initState() {
     super.initState();
     //var _diff = _newTime.difference(_now);
-    print(newTimes.hourMinutes(3, "sabah", 0));
     print(newTimes.getSunTime(_now));
+    print(newTimes.getTime(_now, "sabah"));
     _a = Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {
         _now = DateTime.now();
         var _newTime = DateTime.utc(
-            _now.year, _now.month, 17, newTimes.hourMinutes(3, "sabah", 0), 25);
+          _now.year,
+          _now.month,
+          18,
+          newTimes.hourMinutes(4, "sabah", 0),
+          newTimes.hourMinutes(4, "sabah", 1),
+        );
         var _diff = _newTime.difference(_now);
         _vakit = _diff.inHours < 10
             ? "0${_diff.toString().split('.')[0]}"
@@ -70,7 +78,7 @@ class _MyFlexiableAppBarState extends State<MyFlexiableAppBar> {
                   ),
                   Container(
                     child: Text(
-                      "05:22",
+                      "05:23",
                       style: TextStyle(
                         color: Colors.white,
                         letterSpacing: 2.0,

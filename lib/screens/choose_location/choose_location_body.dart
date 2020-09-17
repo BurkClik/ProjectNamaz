@@ -6,10 +6,6 @@ import 'package:namaz_project_x/screens/prayer_time/prayer_time.dart';
 import 'package:namaz_project_x/theme/size_config.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 
-/// TODO:
-///   [] GPS kullanarak konum al yavru.
-///   [] İl seçince ilin ilçeleri gelecek.
-///   [] Pickerların tasarımı yapılacak.
 
 class ChooseLocationBody extends StatefulWidget {
   @override

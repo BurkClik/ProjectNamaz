@@ -16,7 +16,7 @@ class _TimeTableState extends State<TimeTable> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 38.0, left: 8.0, right: 8.0),
+      padding: EdgeInsets.only(top: 38.0, left: 18.0, right: 18.0),
       child: Table(
         border: TableBorder(
           horizontalInside: BorderSide(),
@@ -39,13 +39,13 @@ class _TimeTableState extends State<TimeTable> {
               Text('Yatsı', style: kVakitTextStyle),
             ],
           ),
-          buildTableRow(days.getWeekdays()[0], weeklyTimes.getTimes()),
-          buildTableRow(days.getWeekdays()[1], weeklyTimes.getTimes()),
-          buildTableRow(days.getWeekdays()[2], weeklyTimes.getTimes()),
-          buildTableRow(days.getWeekdays()[3], weeklyTimes.getTimes()),
-          buildTableRow(days.getWeekdays()[4], weeklyTimes.getTimes()),
-          buildTableRow(days.getWeekdays()[5], weeklyTimes.getTimes()),
-          buildTableRow(days.getWeekdays()[6], weeklyTimes.getTimes()),
+          buildTableRow(days.getWeekdays()[0], weeklyTimes.getAllTimes()),
+          buildTableRow(days.getWeekdays()[1], weeklyTimes.getAllTimes()),
+          buildTableRow(days.getWeekdays()[2], weeklyTimes.getAllTimes()),
+          buildTableRow(days.getWeekdays()[3], weeklyTimes.getAllTimes()),
+          buildTableRow(days.getWeekdays()[4], weeklyTimes.getAllTimes()),
+          buildTableRow(days.getWeekdays()[5], weeklyTimes.getAllTimes()),
+          buildTableRow(days.getWeekdays()[6], weeklyTimes.getAllTimes()),
         ],
       ),
     );
