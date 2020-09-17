@@ -6,12 +6,8 @@ Bu projede olması planlanan özellikler:
     - [ ]    Kıble Bulma
     - [ ]    Zikirmatik
     - [ ]    Yakındaki Camileri Gösterme
-   - [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
+   - [ ] Namaz Vakitleri
+- [x] Kaza Namazı Hesaplama ve Kaza Namazı Sayacı
+- [x] Kıble Bulma
+- [x] Zikirmatik
+- [ ] Yakındaki Camileri Gösterme
