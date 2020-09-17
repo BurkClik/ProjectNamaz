@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:namaz_project_x/components/custom_appbar.dart';
+import 'package:namaz_project_x/screens/demo_home.dart';
 import 'package:namaz_project_x/screens/kaza_calculate/kaza.calculate.dart';
 import 'package:namaz_project_x/screens/kaza_sayar/kaza_sayar.dart';
 import 'package:namaz_project_x/screens/prayer_time/prayer_time_body.dart';
@@ -21,6 +22,7 @@ class _PrayerTimeState extends State<PrayerTime> {
     KazaSayar(),
     KazaCalculate(),
     Zikir(),
+    DemoScreen(),
   ];
 
   @override
@@ -86,6 +88,16 @@ class _PrayerTimeState extends State<PrayerTime> {
               onTap: () {
                 setState(() {
                   _selectedPage = 3;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.watch),
+              title: Text('Demo'),
+              onTap: () {
+                setState(() {
+                  _selectedPage = 4;
                 });
                 Navigator.pop(context);
               },

@@ -1,199 +1,106 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:namaz_project_x/models/times.dart';
 import 'package:namaz_project_x/theme/constant.dart';
 import 'package:namaz_project_x/screens/prayer_time/prayer_time_body.dart';
 import 'package:namaz_project_x/theme/size_config.dart';
 
-class DemoHome extends StatefulWidget {
-  static String routeName = "/demo_home";
-  @override
-  _DemoHomeState createState() => _DemoHomeState();
-}
+class DemoScreen extends StatelessWidget {
+  var _now = DateTime.now();
+  Times times = new Times();
 
-class _DemoHomeState extends State<DemoHome> {
-  var now = new DateTime.now();
-  // now.week day haftanın gününü dönüyor
-
+  static String routeName = "/demo";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: Text(
-              'ANKARA',
-              style: TextStyle(
-                color: Colors.white,
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    blurRadius: 10.0,
-                    color: Colors.black,
-                    offset: Offset(5.0, 5.0),
-                  ),
-                ],
-              ),
-            ),
-            centerTitle: true,
-            leading: IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {
-                print('Bugünlerin yarınları da var');
-              },
-            ),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.location_on),
-                onPressed: () {
-                  print("Herkese Salam");
-                },
-              ),
-            ],
-            iconTheme: IconThemeData(color: Colors.white),
-            pinned: true,
-            floating: true,
-            snap: false,
-            expandedHeight: 240.0,
-            flexibleSpace: Stack(
-              children: [
-                Positioned.fill(
-                  child: Image.asset(
-                    "assets/images/anakara.jpg",
-                    fit: BoxFit.cover,
-                    colorBlendMode: BlendMode.softLight,
-                    color: Colors.black45,
-                  ),
-                ),
-                FlexibleSpaceBar(
-                  background: MyFlexiableAppBar(),
-                ),
-              ],
-            ),
-          ),
-          SliverFixedExtentList(
-            itemExtent: 350,
-            delegate: SliverChildListDelegate(
-              [
-                PrayerBody(),
-              ],
-            ),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        DemoCard(
+          vakitName: "İMSAK",
+          vakit: times.getAllTimes()[_now.weekday - 1]["sabah"],
+          cardImage: AssetImage("assets/images/aksam.jpg"),
+        ),
+        DemoCard(
+          vakitName: "ÖĞLE",
+          vakit: times.getAllTimes()[_now.weekday - 1]["öğle"],
+          cardImage: AssetImage("assets/images/noon_6.jpg"),
+        ),
+        DemoCard(
+          vakitName: "İKİNDİ",
+          vakit: times.getAllTimes()[_now.weekday - 1]["ikindi"],
+          cardImage: AssetImage("assets/images/morning.jpg"),
+        ),
+        DemoCard(
+          vakitName: "AKŞAM",
+          vakit: times.getAllTimes()[_now.weekday - 1]["akşam"],
+          cardImage: AssetImage("assets/images/evening.jpg"),
+        ),
+        DemoCard(
+          vakitName: "YATSI",
+          vakit: times.getAllTimes()[_now.weekday - 1]["yatsı"],
+          cardImage: AssetImage("assets/images/gece.jpg"),
+        ),
+      ],
     );
   }
 }
 
-class MyFlexiableAppBar extends StatelessWidget {
+class DemoCard extends StatelessWidget {
+  final String vakitName, vakit;
+  final ImageProvider cardImage;
+
+  const DemoCard({Key key, this.vakit, this.vakitName, this.cardImage})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    child: Text(
-                      "İmsak",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28.0,
-                        shadows: [
-                          Shadow(
-                              blurRadius: 10.0,
-                              color: Colors.black,
-                              offset: Offset(5.0, 5.0)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: getProportionateScreenHeight(30),
-                    ),
-                    child: Container(
-                      child: Text(
-                        "05:22",
-                        style: TextStyle(
-                          color: Colors.white,
-                          letterSpacing: 2.0,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 36.0,
-                          shadows: [
-                            Shadow(
-                                blurRadius: 10.0,
-                                color: Colors.black,
-                                offset: Offset(5.0, 5.0)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+    return Padding(
+      padding: EdgeInsets.only(
+        top: getProportionateScreenHeight(18),
+        left: getProportionateScreenWidth(18),
+        right: getProportionateScreenWidth(18),
+      ),
+      child: Container(
+        height: getProportionateScreenHeight(100),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: cardImage,
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.circular(18.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              vakitName,
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Mulish",
+                shadows: [
+                  Shadow(
+                      blurRadius: 2.0,
+                      color: Colors.black,
+                      offset: Offset(2.0, 2.0)),
                 ],
               ),
             ),
-            Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 8.0, left: 8.0),
-                      child: Container(
-                          child: Row(
-                        children: <Widget>[
-                          Container(
-                            child: Text(
-                              '15 Eylül Çarşamba',
-                              style: TextStyle(
-                                  color: Colors.white70,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 16.0),
-                            ),
-                          ),
-                        ],
-                      )),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 8.0),
-                          child: Text(
-                            "Vaktin Çıkmasına",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 8.0, right: 8.0),
-                          child: Text(
-                            "04:23:12",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+            Text(
+              vakit,
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Mulish",
+                shadows: [
+                  Shadow(
+                      blurRadius: 5.0,
+                      color: Colors.black,
+                      offset: Offset(2.0, 2.0)),
                 ],
               ),
-            ),
+            )
           ],
         ),
       ),

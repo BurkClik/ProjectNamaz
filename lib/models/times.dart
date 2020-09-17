@@ -58,7 +58,7 @@ class Times {
     },
   ];
 
-  List getTimes() {
+  List getAllTimes() {
     return _data;
   }
 
@@ -67,6 +67,10 @@ class Times {
       return int.parse(_data[day][time].split(':')[hm]) - 3;
     }
     return int.parse(_data[day][time].split(':')[hm]);
+  }
+
+  String getTime(DateTime today, String time) {
+    return _data[today.weekday - 1][time];
   }
 
   String getSunTime(DateTime today) {
