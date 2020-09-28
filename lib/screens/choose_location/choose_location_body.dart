@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:namaz_project_x/components/default_button.dart';
 import 'package:namaz_project_x/theme/constant.dart';
-import 'package:namaz_project_x/screens/prayer_time/prayer_time.dart';
+import 'package:namaz_project_x/screens/home.dart';
 import 'package:namaz_project_x/theme/size_config.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
-
 
 class ChooseLocationBody extends StatefulWidget {
   @override
@@ -66,7 +65,7 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
                   items: cities.keys.toList(),
                   selectedItem: selectedIl,
                   onChanged: (value) => setState(
-                    () {
+                        () {
                       selectedIl = value;
                       selectedIlce = cities[value].first;
                     },
@@ -83,6 +82,7 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
               width: getProportionateScreenWidth(200),
               height: getProportionateScreenHeight(50),
               child: RaisedButton.icon(
+                disabledColor: Colors.grey,
                 color: Colors.white,
                 elevation: 8,
                 icon: Icon(Icons.arrow_downward),
@@ -99,7 +99,9 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
                   showDivider: false,
                   items: cities[selectedIl],
                   selectedItem: selectedIlce,
-                  onChanged: (value) => setState(() => selectedIlce = value),
+                  onChanged: (value) => setState(() {
+                    selectedIlce = value;
+                  }),
                   onCancelled: () => print("Scroll Picker cancelled"),
                   onConfirmed: () => print("Scroll Picker confirmed"),
                 ),
@@ -111,7 +113,7 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
                   horizontal: getProportionateScreenWidth(20)),
               child: DefaultButton(
                 press: () {
-                  Navigator.of(context).popAndPushNamed("/prayer_time");
+                  Navigator.of(context).popAndPushNamed("/home");
                 },
                 text: 'Devamkee',
               ),

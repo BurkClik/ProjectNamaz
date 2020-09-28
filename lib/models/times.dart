@@ -74,6 +74,6 @@ class Times {
   }
 
   String getSunTime(DateTime today) {
-    return _data[today.weekday]["günes"];
+    return _data[today.weekday - 1]["günes"];
   }
 }

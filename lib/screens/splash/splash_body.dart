@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:namaz_project_x/components/default_button.dart';
 import 'package:namaz_project_x/screens/splash/splash_content.dart';
 import 'package:namaz_project_x/theme/constant.dart';
@@ -15,12 +16,16 @@ class _SplashBodyState extends State<SplashBody> {
   List<Map<String, String>> splashData = [
     {
       "text": "Welcome to the Hell, Let's burn!",
-      "image": "assets/images/mosque.png"
+      "image": "assets/images/splash_kabe_2.png"
     },
     {
       "text": "Bir rekat namaz seni cehennemden bir adım uzaklaştırır!",
-      "image": "assets/images/prayers2.png"
-    }
+      "image": "assets/images/splash_kabe.png"
+    },
+    {
+      "text": "Bir rekat namaz seni cehennemden bir adım uzaklaştırır!",
+      "image": "assets/images/splash_prayer.png"
+    },
   ];
   @override
   Widget build(BuildContext context) {

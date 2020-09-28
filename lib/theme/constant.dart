@@ -15,3 +15,27 @@ const kAnimationDuration = Duration(milliseconds: 200);
 const kVakitTextStyle = TextStyle(
   fontFamily: "Mulish",
 );
+
+// Custom appBar
+const kAppBarCity = TextStyle(
+  color: Colors.white,
+  letterSpacing: 2.0,
+  fontWeight: FontWeight.bold,
+  shadows: [
+    Shadow(
+      blurRadius: 10.0,
+      color: Colors.black,
+      offset: Offset(5.0, 5.0),
+    ),
+  ],
+);
+
+const kAppbarInfoText = TextStyle(
+  color: Colors.white70,
+  fontSize: 16.0,
+);
+
+const kAppbarTimeText = TextStyle(
+  color: Colors.white,
+  fontSize: 20.0,
+);
