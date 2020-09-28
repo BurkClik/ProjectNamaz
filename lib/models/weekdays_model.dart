@@ -9,6 +9,21 @@ class Weekdays {
     "Pazar",
   ];
 
+  List<String> _month = <String>[
+    "Ocak",
+    "Şubat",
+    "Mart",
+    "Nisan",
+    "Mayıs",
+    "Haziran",
+    "Temmuz",
+    "Ağustos",
+    "Eylül",
+    "Ekim",
+    "Kasım",
+    "Aralık"
+  ];
+
   String getDay() {
     return _days[DateTime.now().weekday - 1];
   }
@@ -19,5 +34,9 @@ class Weekdays {
 
   int getIndexOfDay({String gun}) {
     return _days.indexOf(gun);
+  }
+
+  String todayDate(DateTime now) {
+    return "${now.day} ${_month[now.month - 1]} ${_days[now.weekday - 1]}";
   }
 }

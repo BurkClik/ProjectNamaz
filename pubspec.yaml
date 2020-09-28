@@ -34,6 +34,10 @@ dependencies:
   flutter_material_pickers: ^1.7.4
   flutter_icons: ^1.1.0
   intl: ^0.16.1
+  geolocator: ^6.0.0+4
+  geocoding: ^1.0.4+1
+  http: ^0.12.2
+  shared_preferences: ^0.5.12
 
 dev_dependencies:
   flutter_test:
