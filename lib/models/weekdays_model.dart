@@ -37,6 +37,9 @@ class Weekdays {
   }
 
   String todayDate(DateTime now) {
+    if (now.day < 10) {
+      return "0${now.day} ${_month[now.month - 1]} ${_days[now.weekday - 1]}";
+    }
     return "${now.day} ${_month[now.month - 1]} ${_days[now.weekday - 1]}";
   }
 }

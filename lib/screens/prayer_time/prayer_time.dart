@@ -1,33 +1,68 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:namaz_project_x/models/times.dart';
 import 'package:namaz_project_x/models/weekdays_model.dart';
-import 'package:namaz_project_x/services/networking.dart';
 import 'package:namaz_project_x/theme/constant.dart';
 import 'package:namaz_project_x/theme/size_config.dart';
 
-class DemoScreen extends StatefulWidget {
-  static String routeName = "/demo";
+class PrayerTimeScreen extends StatefulWidget {
+  static String routeName = "/prayer_time";
+
+  PrayerTimeScreen({this.data});
+
+  final dynamic data;
 
   @override
-  _DemoScreenState createState() => _DemoScreenState();
+  _PrayerTimeState createState() => _PrayerTimeState();
 }
 
-class _DemoScreenState extends State<DemoScreen> {
+class _PrayerTimeState extends State<PrayerTimeScreen> {
   Times times = new Times();
+  Weekdays weekdays = new Weekdays();
   int currentPage = 0;
 
-  List<String> days = [
-    "15 Eylül Çarşamba",
-    "16 Eylül Perşembe",
-    "17 Eylül Cuma",
-    "18 Eylül Cumartesi",
-    "19 Eylül Pazar",
-    "20 Eylül Pazartesi",
-    "21 Eylül Salı",
-  ];
+  Timer _a;
+  DateTime _now = DateTime.now();
+  String dateToday;
+
+  Future<Map<String, dynamic>> getData(DateTime today) async {
+    var data = await widget.data;
+    return data[weekdays.todayDate(today)];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Vakit ile ilgili kısımlar
+    _a = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      setState(() {
+        _now = DateTime.now();
+
+        dateToday =
+            weekdays.todayDate(_now); // Date at left bottom 29 Eylül Salı
+      });
+    });
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<String> days = [
+      weekdays.todayDate(_now),
+      weekdays.todayDate(_now.add(Duration(days: 1))),
+      weekdays.todayDate(_now.add(Duration(days: 2))),
+      weekdays.todayDate(_now.add(Duration(days: 3))),
+      weekdays.todayDate(_now.add(Duration(days: 4))),
+      weekdays.todayDate(_now.add(Duration(days: 5))),
+      weekdays.todayDate(_now.add(Duration(days: 6))),
+    ];
     return Column(
       children: [
         Padding(

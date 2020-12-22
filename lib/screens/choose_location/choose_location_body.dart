@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:namaz_project_x/components/default_button.dart';
+import 'package:namaz_project_x/json/vakitler.dart';
 import 'package:namaz_project_x/theme/constant.dart';
 import 'package:namaz_project_x/screens/home.dart';
 import 'package:namaz_project_x/theme/size_config.dart';
@@ -12,16 +13,12 @@ class ChooseLocationBody extends StatefulWidget {
 }
 
 class _ChooseLocationBodyState extends State<ChooseLocationBody> {
-  var selectedIl = "Ankara";
-  var selectedIlce = "EMolu";
+  static Cities sehir = Cities();
 
-  var cities = {
-    'Adana': ['Ankara', 'Mankara'],
-    'Adıyaman': ['Molu', 'Dolu'],
-    'Afyon': ['DMolu', 'Dolu'],
-    'Amasya': ['SMolu', 'Dolu'],
-    'Ankara': ['EMolu', 'Dolu']
-  };
+  static List city = sehir.getCities();
+
+  var selectedIl = city[0];
+  var selectedIlce = sehir.getDistrict(city[0])[0];
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +59,12 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
                   headerColor: kPrimaryColor,
                   buttonTextColor: kPrimaryColor,
                   showDivider: false,
-                  items: cities.keys.toList(),
+                  items: city,
                   selectedItem: selectedIl,
                   onChanged: (value) => setState(
-                        () {
+                    () {
                       selectedIl = value;
-                      selectedIlce = cities[value].first;
+                      selectedIlce = sehir.getDistrict(value).first;
                     },
                   ),
                   onCancelled: () => print("Scroll Picker cancelled"),
@@ -97,7 +94,7 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
                   headerColor: kPrimaryColor,
                   buttonTextColor: kPrimaryColor,
                   showDivider: false,
-                  items: cities[selectedIl],
+                  items: sehir.getDistrict(selectedIl),
                   selectedItem: selectedIlce,
                   onChanged: (value) => setState(() {
                     selectedIlce = value;
@@ -113,9 +110,16 @@ class _ChooseLocationBodyState extends State<ChooseLocationBody> {
                   horizontal: getProportionateScreenWidth(20)),
               child: DefaultButton(
                 press: () {
-                  Navigator.of(context).popAndPushNamed("/home");
+                  //Navigator.of(context).popAndPushNamed("/home");
+                  //Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Home(
+                      cityName: selectedIl,
+                      districkName: selectedIlce,
+                    );
+                  }));
                 },
-                text: 'Devamkee',
+                text: 'Allah Belamızı Vermiş',
               ),
             ),
             Spacer(flex: 1),

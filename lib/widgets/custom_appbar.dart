@@ -4,14 +4,12 @@ import 'package:namaz_project_x/components/appbar/appbar_center_text.dart';
 import 'package:namaz_project_x/components/appbar/appbar_info.dart';
 import 'package:namaz_project_x/models/times.dart';
 import 'package:namaz_project_x/models/weekdays_model.dart';
-import 'package:namaz_project_x/services/networking.dart';
 import 'package:namaz_project_x/theme/constant.dart';
-import 'package:namaz_project_x/theme/size_config.dart';
 
 class CustomAppBar extends StatefulWidget {
-  final dynamic date;
+  CustomAppBar({this.date, this.cityName, this.districtName});
 
-  CustomAppBar({this.date});
+  final date, cityName, districtName;
 
   @override
   _CustomAppBarState createState() => _CustomAppBarState();
@@ -25,29 +23,46 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Timer _a;
   String _vakit;
   DateTime _now = DateTime.now();
-  String aaa;
+  String dateToday;
+
+/*   List<String> demoV = ["imsak", "öğle", "ikindi", "akşam", "yatsı"];
+  List<String> demoS = ["05:00", "13:02", "16:42", "18:32", "20:12"]; */
+
+  String demo;
+
+  Future<Map<String, dynamic>> getData(DateTime today) async {
+    var data = await widget.date;
+    return data[today.day - 1];
+  }
+
+  void handleData() async {
+    await getData(_now).then((value) async {
+      demo = value["ikindi"];
+    });
+  }
 
   @override
   void initState() {
+    //print(getData(_now.add(Duration(days: 1))).then((value) => print(value)));
     super.initState();
-    print(_now);
-
-/*     print(_now);
-    print(newTimes.getSunTime(_now));
-    print(newTimes.getTime(_now, "sabah")); */
+    handleData();
+    print('demo: $demo');
+    // Vakit ile ilgili kısımlar
     _a = Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {
         _now = DateTime.now();
-        aaa = weekdays.todayDate(_now);
+        dateToday =
+            weekdays.todayDate(_now); // Date at left bottom 29 Eylül Salı
         var _newTime = DateTime.utc(
           _now.year,
           _now.month,
-          23,
-          newTimes.hourMinutes(4, "sabah", 0),
+          _now.day,
+          newTimes.hourMinutes(
+              4, "sabah", 0), // (Ayın kaçıncı günü, vakit ismi, saat-dakika)
           newTimes.hourMinutes(4, "sabah", 1),
         );
         var _diff = _newTime.difference(_now);
-        _vakit = _diff.inHours < 10
+        _vakit = _diff.inHours < 10 // Vaktin çıkması
             ? "0${_diff.toString().split('.')[0]}"
             : "${_diff.toString().split('.')[0]}";
       });
@@ -65,7 +80,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     return SliverAppBar(
       title: Text(
-        'ANKARA',
+        widget.districtName,
         style: kAppBarCity,
       ),
       centerTitle: true,
@@ -103,17 +118,41 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            child: AppbarCenterText(
-                              text: "İmsak",
-                              fontSize: 28.0,
+                            child: FutureBuilder(
+                              future: getData(_now),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return AppbarCenterText(
+                                    text: snapshot.data.keys
+                                        .toList()[0]
+                                        .toUpperCase(),
+                                    fontSize: 28.0,
+                                  );
+                                }
+                                return Text("aaaa");
+                              },
                             ),
                           ),
                           Container(
-                            child: AppbarCenterText(
-                              text: '05:23',
-                              letterSpacing: 2.0,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 36.0,
+                            child: FutureBuilder(
+                              future: getData(_now),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return AppbarCenterText(
+                                    text: '${snapshot.data["imsak"]}',
+                                    letterSpacing: 2.0,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 36.0,
+                                  );
+                                }
+                                return Text(
+                                  "aaaa",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ); // Burası düzenlenecek
+                              },
                             ),
                           ),
                           Row(
@@ -123,19 +162,27 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                 Icons.wb_sunny,
                                 color: Colors.yellow,
                               ),
-                              Text(
-                                newTimes.getSunTime(_now),
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  shadows: [
-                                    Shadow(
-                                        blurRadius: 10.0,
-                                        color: Colors.black,
-                                        offset: Offset(5.0, 5.0)),
-                                  ],
-                                ),
+                              FutureBuilder(
+                                future: getData(_now),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data["güneş"],
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        shadows: [
+                                          Shadow(
+                                              blurRadius: 10.0,
+                                              color: Colors.black,
+                                              offset: Offset(5.0, 5.0)),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                  return Text("aaaa"); // düzenlenecek
+                                },
                               ),
                             ],
                           ),
@@ -151,7 +198,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                           Padding(
                             padding: EdgeInsets.only(bottom: 8.0, left: 8.0),
                             child: Text(
-                              "$aaa",
+                              "$dateToday",
                               style: kAppbarInfoText,
                             ),
                           ),

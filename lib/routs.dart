@@ -10,5 +10,5 @@ final Map<String, WidgetBuilder> routes = {
   ChooseLocation.routeName: (context) => ChooseLocation(),
   Home.routeName: (context) => Home(),
   KazaSayar.routeName: (context) => KazaSayar(),
-  DemoScreen.routeName: (context) => DemoScreen(),
+  PrayerTimeScreen.routeName: (context) => PrayerTimeScreen(),
 };
